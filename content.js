@@ -1,8 +1,35 @@
+var target = document.body;
+
+//create an observer instance
+var observer = new MutationObserver(function(mutations) {
+  //loop through the mutations
+  mutations.forEach(function(mutation) {
+    var elements = document.querySelectorAll("ytd-thumbnail-overlay-time-status-renderer[overlay-style='SHORTS']");
+    console.log("num yt shorts is " + elements.length);
+    for (var i = 0, l = elements.length; i < l; i++) {
+      child = element[i].closest("ytd-grid-video-renderer");
+      child.parentElement.removeChild(child);
+    }
+
+    var shorts = document.getElementsByClassName("rich-section-content");
+    shorts[0].innerHTML = "";
+    console.log(shorts);
+
+  });
+});
+
+//configure the observer options
+var config = { attributes: true, childList: true, characterData: true };
+
+//start observing the target element
+observer.observe(target, config);
+
+
 /*chrome.webNavigation.onCompleted.addListener(function(details) {
   // Execute your content script on the tab where the event occurred
     alert("Loaded");
 });*/
-alert("test");
+//alert("test");
 
 //var images = document.querySelectorAll ("[is-shorts]");
 var images = document.getElementsByTagName("img");
